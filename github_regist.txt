@@ -27,14 +27,14 @@ Keyの登録を選択し、タイトルとキーの入力を行う。
 
 ■Linuxの開発内容をgithubにコミット
 プロジェクトフォルダで任意のファイルを作成
-git init : 初期化
+git init  #初期化
 git add . 
-git commit -m "first project commit" : gitにファイルを登録
+git commit -m "first project commit" #gitにファイルを登録
 git remote add origin https://github.com/kazuhirosaji/git_command_list.git : 
 	共有リポジトリ(origin)を作成。
 	リポジトリのURLは、事前にgithubのページで作成した、githubのリポジトリのURLを参照
 
-git push origin master : origin(github)にmaster(ローカル開発内容)を登録する
+git push origin master #origin(github)にmaster(ローカル開発内容)を登録する
 
 githubのページの対象リポジトリのページに、登録内容が反映されていることを確認
 
