@@ -1,0 +1,41 @@
+===Linuxからのgithubへの登録===
+
+参考
+http://akaato.blogspot.jp/2011/04/github-ssh.html
+
+■ssh 公開鍵の作成
+
+
+ssh-keygen コマンドを使って、ssh の鍵を作ります。
+
+$ ssh-keygen -t rsa -C "hogehoge@gmail.com" -f ~/.ssh/kazuhirosaji
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+パスフレーズ (ssh 鍵用のパスワードみたいなものです) を聞かれるので、入力します。
+
+ssh の秘密鍵が ~/.ssh/kazuhirosaji に、公開鍵が ~/.ssh/kazuhirosaji.pub に保存されました。
+
+
+■GitHub に ssh の公開鍵を登録する
+自身のアカウントで https://github.com/settings/ssh にログイン
+
+Keyの登録を選択し、タイトルとキーの入力を行う。
+
+タイトル: 適当な名前 例: GitHub for Ubuntsu
+キー: 作成した公開鍵 : ~/.ssh/kazuhirosaji.pub の中身をコピーする
+
+■Linuxの開発内容をgithubにコミット
+プロジェクトフォルダで任意のファイルを作成
+git init : 初期化
+git add . 
+git commit -m "first project commit" : gitにファイルを登録
+git remote add origin https://github.com/kazuhirosaji/git_command_list.git : 
+	共有リポジトリ(origin)を作成。
+	リポジトリのURLは、事前にgithubのページで作成した、githubのリポジトリのURLを参照
+
+git push origin master : origin(github)にmaster(ローカル開発内容)を登録する
+
+githubのページの対象リポジトリのページに、登録内容が反映されていることを確認
+
+
