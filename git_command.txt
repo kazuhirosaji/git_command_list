@@ -1,0 +1,118 @@
+config設定
+-----
+git config --global user.name "kazuhirosaji"
+git config --global user.email "kazuhirosaji@gmail.com"
+git config --global color.ui true
+git config -l
+git config --help    or git help config
+
+初期設定処理
+-----
+git init : 初期化
+git add index.html : ステージングエリアに保存
+git commit : ステージングエリアの変更をリポジトリに保存
+git log : コミットログを表示
+git log --oneline
+git log -p : ファイルの変更内容を見る
+git log --stat : どのファイルが何か所変わったか
+
+# git commit -am "message" : git add と git commit を同時に行う
+
+変更されたファイルの管理
+-------
+git status : 変更ファイルの確認
+git checkout . : 変更ファイルのRevert
+git checkout -- index.html : index.htmlの変更部分のRevert
+git reset index.html : ステージングエリアに保存した変更をローカル変更状態に戻す
+
+git diff : ローカル変更内容の確認
+git diff --cached : ステージングエリアの変更内容の確認
+---------
+
+ファイルの削除
+---------
+git rm  : git 管理下のファイルの削除(ステージング状態で削除)
+git mv  : git 管理下のファイルの削除
+
+git管理下のファイルの設定
+--------
+.gitignore  : 管理外のファイルにしたいファイル名のリスト(例 : *.log)
+		.gitignore を置いたフォルダ以下で有効になる
+
+
+コミット オプション
+--------
+git commit --amend:  前のコミットログを上書きしてコミット(ログが1つになる)
+
+前バージョンへ
+--------
+git reset --hard HEAD
+	 : ステージングエリアの変更を取り消し、直前のコミット時の状態(HEAD)に戻す
+
+
+git reset --hard HEAD^
+	: HEAD^ (2つ前のコミットの状態に戻す) 
+	: git log、作業ローカル全て2つ前のコミット時の状態に戻る
+
+git reset --hard ORIG_HEAD
+	: resetしたコミットを取り消す(ORIG_HEADは前回resetされたコミット)
+
+
+ブランチ
+--------
+git branch : ブランチの一覧を表示 デフォルトbranch名は master
+git branch hoge : 新しいブランチを作成
+git checkout hoge : 現在のブランチをhogeに変更
+git checkout -b hoge : 新しいブランチhogeを作って現在のブランチを変更
+
+git merge hoge : hogeの変更を現在のブランチにマージする
+git branch -d hoge : hoge ブランチを削除
+
+★衝突発生時は衝突したファイルを修正して add, commit する
+
+タグ
+---------
+git tag v1.0 : 直前のコミットにタグ名(v1.0)を付ける
+git tag v0.9 7990f04a00d2b97 : 指定したIDのコミットにタグを付ける
+git tag  : タグの一覧を表示
+git show v1.0 : v1.0 のタグのコミット内容詳細を表示
+git tag -d v0.9 : 指定したタグを削除
+
+コマンドのエイリアス(短縮名の付け方)
+---------
+git config --global alias.co checkout : checkout の短縮名をcoにする
+git config -l : エイリアスの一覧の確認
+
+共有リポジトリ
+----------
+ourweb.git
+
+A : myweb
+B : myweb2
+
+■ourweb.git配下
+git init --bare : 共有リポジトリの作成(管理ファイルのみ管理され、コミット等は行わない)
+
+■myweb配下
+git init
+git remote add origin /media/sf_usr_work/git_dotinstall2/ourweb.git
+ -> 共有リポジトリを登録 origin は リモートリポジトリの名前
+　　リポジトリの場所を指定する
+git config -l : リモートリポジトリの確認
+
+git push origin master : origin(共有リポジトリに向かって) master(myweb)の変更を入れる
+
+■ourweb.git の親ディレクトリ
+git clone ./ourweb.git/ myweb2 : ourweb.git(共有リポジトリ)の内容をmyweb2(未作成)として作成する
+
+■myweb2配下
+ファイルを変更
+git add .
+git commit -m "comment" で変更をコミット
+git push origin master : origin(共有リポジトリに向かって) master(myweb2)の変更を入れる
+
+■myweb1配下
+git pull origin master : origin(共有リポジトリ)の変更を master(myweb)に反映する
+
+
+
