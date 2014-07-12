@@ -72,6 +72,16 @@ git branch -d hoge : hoge ブランチを削除
 
 ★衝突発生時は衝突したファイルを修正して add, commit する
 
+ブランチ使用例
+--------
+$ git checkout master # 現在のブランチをmasterブランチに変更
+$ git checkout -b sign-up # sign-up ブランチを作成し、現在のブランチをsign-upに変更
+
+$ git add . 
+$ git commit -m "Finish user signup" # 変更をブランチにコミット
+$ git checkout master # 現在のブランチをmasterに戻す
+$ git merge sign-up # masterブランチにsign-upブランチの変更をマージ
+
 タグ
 ---------
 git tag v1.0 : 直前のコミットにタグ名(v1.0)を付ける
